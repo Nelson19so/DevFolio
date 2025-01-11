@@ -57,7 +57,7 @@
   </head>
 
   <body class="index-page">
-    {% include 'Navbar2.html' %}
+    {% include 'Navbar.html' %}
 
     <main class="main">
       <!-- Page Title -->
@@ -97,6 +97,27 @@
             <!-- <div class="swiper-wrapper"> -->
 
             <div class="swiper-slide">
+              <!-- -------------- Peoples testimonial post ------------ -->
+              {% for testimonial in testimonials %}
+              <div class="testimonial-item">
+                <img class="testimonial-img" alt="" />
+
+                <h3>{{ testimonial.username }}</h3>
+                <h4>{{ testimonial.work }}</h4>
+                <div class="stars">
+                  <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                  ><i class="bi bi-star-fill"></i>
+                </div>
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  <span>{{ testimonial.testimonial }}</span>
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+              </div>
+              <hr />
+              {% endfor %}
+
               <div class="testimonial-item">
                 <img
                   src="{% static '/img/testimonials/testimonials-1.jpg' %}"
@@ -237,6 +258,87 @@
                 </p>
               </div>
               <hr />
+
+              <div
+                class="bg-success w-100 p-2 mb-3 mt-3"
+                style="border-radius: 4px"
+              >
+                <h1 class="mt-5 text-center text-white mb-5">
+                  Tell us what you think about Me
+                </h1>
+              </div>
+
+              <form
+                method="post"
+                class="php-email-form"
+                data-aos="fade-up"
+                data-aos-delay="300"
+                id="contactForm"
+              >
+                <!-- django form csrf token key for each contact here -->
+                {% csrf_token %}
+                <div class="row gy-4">
+                  <div class="col-md-6">
+                    <input
+                      type="text"
+                      name="username"
+                      class="form-control"
+                      placeholder="Your Name"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-6">
+                    <input
+                      type="email"
+                      class="form-control"
+                      name="email"
+                      placeholder="Your Email"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="work"
+                      placeholder="Work"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12">
+                    <textarea
+                      class="form-control"
+                      name="testimonial"
+                      rows="6"
+                      placeholder="Testimonial"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="col-md-12">
+                    <input
+                      type="file"
+                      name="profile"
+                      id="profile"
+                      class="form-control"
+                      required
+                    />
+                  </div>
+
+                  <div class="col-md-12 text-center">
+                    <button
+                      type="submit"
+                      name="submitTestimonial"
+                      class="btn btn-success w-100 pt-2 pb-2"
+                    >
+                      Send Message
+                    </button>
+                  </div>
+                </div>
+              </form>
             </div>
             <!-- End testimonial item -->
 

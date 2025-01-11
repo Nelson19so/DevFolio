@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Contact
-from .forms import ContactForm
+from .models import Contact, Testimonial
+from .forms import ContactForm, TestimonialForm
 
 # Create your views here.
 
@@ -63,5 +63,42 @@ def services_page(request):
 
 # all testmonial view start
 def all_testimonials(request):
-    return render(request, 'blogpages/all-testimonials.html')
+    # Getting all testimonial for rendering
+    testimonials = Testimonial.objects.all()
+
+    # Handling POST request
+    if request.method == "POST":
+        print(request.POST)
+        form = TestimonialForm(request.POST)
+
+        # Validating form
+        if form.is_valid():
+            testimonial = Testimonial(
+                # connecting custom username with model username form
+                username = form.cleaned_data["username"],
+                # ---------------------------------------------->
+                # connecting custom email with model email form
+                email = form.cleaned_data["email"],
+                # ----------------------------------------------->
+                # connecting custom work with model work input form
+                work = form.cleaned_data["work"],
+                # ---------------------------------------------->
+                # connecting custom testimonial with model testimonial input form
+                testimonial = form.cleaned_data["testimonial"]
+            )
+            # saving testimonial once valid
+            testimonial.save()
+            # renders the susccess template
+            page = "seccessfull"
+            return render(request, 'SubmitSuccessfulandError.html', {'successful': True, "page":page})
+        else:
+            # renders the error template once it's not valid
+            return render(request, 'SubmitSuccessfulandError.html', {'error': True})
+    else:
+        form = TestimonialForm()
+
+    # adding context
+    context = {"testimonials":testimonials}
+    # renders testimonial template
+    return render(request, 'blogpages/all-testimonials.html', context)
 # all testimonial view ends
