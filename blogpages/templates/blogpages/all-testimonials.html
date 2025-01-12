@@ -100,7 +100,13 @@
               <!-- -------------- Peoples testimonial post ------------ -->
               {% for testimonial in testimonials %}
               <div class="testimonial-item">
-                <img class="testimonial-img" alt="" />
+                <img
+                  src="{{testimonial.profile.url}}"
+                  class="testimonial-img"
+                  alt="{{testimonial.username}}"
+                />
+
+                <!-- {{testimonial.profile.url}} -->
 
                 <h3>{{ testimonial.username }}</h3>
                 <h4>{{ testimonial.work }}</h4>
@@ -274,6 +280,7 @@
                 data-aos="fade-up"
                 data-aos-delay="300"
                 id="contactForm"
+                enctype="multipart/form-data"
               >
                 <!-- django form csrf token key for each contact here -->
                 {% csrf_token %}

@@ -69,7 +69,7 @@ def all_testimonials(request):
     # Handling POST request
     if request.method == "POST":
         print(request.POST)
-        form = TestimonialForm(request.POST)
+        form = TestimonialForm(request.POST, request.FILES)
 
         # Validating form
         if form.is_valid():
@@ -84,7 +84,10 @@ def all_testimonials(request):
                 work = form.cleaned_data["work"],
                 # ---------------------------------------------->
                 # connecting custom testimonial with model testimonial input form
-                testimonial = form.cleaned_data["testimonial"]
+                testimonial = form.cleaned_data["testimonial"],
+                # ---------------------------------------------->
+                # connecting custom testimonial with model testimonial input form
+                profile = form.cleaned_data["profile"]
             )
             # saving testimonial once valid
             testimonial.save()

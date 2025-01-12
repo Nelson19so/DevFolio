@@ -21,7 +21,7 @@ class Testimonial(models.Model):
     work = models.CharField(max_length=50)
     testimonial = models.TextField(max_length=500)
     date_added = models.DateTimeField(auto_now_add=True)
-    # profile = models.ImageField(upload_to='testimonial/')
+    profile = models.ImageField(upload_to='testimonial/', default=1, blank=True, null=True)
 
     class Meta:
         ordering = ['-date_added']

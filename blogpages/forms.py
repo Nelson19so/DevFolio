@@ -15,4 +15,5 @@ class TestimonialForm(forms.ModelForm):
     fields = ("username",
                "email",
                  "work",
-                   "testimonial")
+                   "testimonial",
+                     "profile")
